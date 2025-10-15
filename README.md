@@ -11,6 +11,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 1: Orientación al Perfil y Metodología del Curso (18 horas)
 
 **Contenido:**
+
 - Introducción a la industria TI y el perfil de desarrollador Front-End
 - Competencias técnicas y habilidades personales valoradas
 - Metodología bootcamp y herramientas de trabajo colaborativo
@@ -22,6 +23,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 2: Fundamentos de Desarrollo Front-End (72 horas)
 
 **Contenido:**
+
 - Introducción al desarrollo web (Front-End, Back-End, Fullstack)
 - **HTML5:** Estructura de documentos, etiquetas semánticas, formularios
 - **CSS:** Hojas de estilo, modelo de cajas, responsividad, Mobile First, Media Queries
@@ -35,6 +37,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 3: Desarrollo de la Interfaz de Usuario Web (56 horas)
 
 **Contenido:**
+
 - Del diseño a la implementación: rol UX/UI vs Front-End
 - Metodologías de organización CSS: BEM, OOCSS, SMACCS
 - **Preprocesador SASS:** Variables, mixins, parciales, patrón 7-1
@@ -46,6 +49,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 4: Fundamentos de Programación en JavaScript (60 horas)
 
 **Contenido:**
+
 - Características del lenguaje JavaScript
 - Variables (simples y complejas), scope, operadores
 - Estructuras de control: Condicionales (if/else)
@@ -59,6 +63,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 5: Programación Avanzada en JavaScript (48 horas)
 
 **Contenido:**
+
 - **Programación Orientada a Objetos (POO):** Clases, objetos, herencia
 - **Notación JSON:** Estructura y manipulación de datos
 - **JavaScript ES6+:**
@@ -77,6 +82,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 6: Desarrollo de Interfaces Interactivas con Framework Vue (72 horas)
 
 **Contenido:**
+
 - **Introducción a Vue.js:** Framework progresivo, componentes web, SPA
 - **Instalación:** CDN, Vue CLI, estructura de proyecto
 - **Componentes Vue:** Morfología (template, script, style)
@@ -90,6 +96,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 7: Desarrollo de Aplicaciones Front-End con Framework Vue (76 horas)
 
 **Contenido:**
+
 - **Componentización avanzada:**
   - Comunicación padre-hijo (props, emit)
   - Ciclo de vida de componentes (hooks)
@@ -109,6 +116,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 8: Desarrollo de Portafolio de un Producto Digital (18 horas)
 
 **Contenido:**
+
 - Importancia del portafolio profesional
 - Buenas prácticas para crear un portafolio
 - **Herramientas:**
@@ -122,6 +130,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ### Módulo 9: Desarrollo de Empleabilidad en la Industria Digital (18 horas)
 
 **Contenido:**
+
 - **Mercado laboral TI:** Características, procesos de selección
 - **Plan de búsqueda laboral:**
   - Elaboración de CV técnico
@@ -138,6 +147,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ## 🛠️ Tecnologías y Herramientas del Stack
 
 ### Lenguajes y Frameworks
+
 - **HTML5**
 - **CSS3 / SASS**
 - **JavaScript (ES6+)**
@@ -145,6 +155,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 - **Bootstrap 4**
 
 ### Herramientas de Desarrollo
+
 - Visual Studio Code
 - Git y GitHub
 - npm / Yarn
@@ -152,6 +163,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 - Webpack y Babel
 
 ### Librerías y APIs
+
 - jQuery
 - Axios
 - Vue Router
@@ -159,6 +171,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 - Firebase
 
 ### Testing
+
 - Jest
 - Mocha + Chai
 - Vue Test Utils
@@ -188,6 +201,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
 ## 🚀 Cómo Usar Este Repositorio
 
 1. **Clonar el repositorio:**
+
    ```bash
    git clone https://github.com/EduardoJavier45/Desarrollo-Curso-Frontend2025.git
    cd Desarrollo-Curso-Frontend2025
@@ -197,6 +211,7 @@ Este repositorio contiene el material de estudio, ejercicios prácticos y proyec
    Cada carpeta contiene ejercicios, proyectos y recursos específicos del módulo.
 
 3. **Instalar dependencias (cuando sea necesario):**
+
    ```bash
    npm install
    ```
@@ -239,6 +254,7 @@ Este proyecto está bajo una licencia de uso educativo personal.
 ## 👤 Autor
 
 **Eduardo Javier Pérez Espíndola**
+
 - GitHub: [@EduardoJavier45](https://github.com/EduardoJavier45)
 - LinkedIn: [Tu perfil de LinkedIn]
 
