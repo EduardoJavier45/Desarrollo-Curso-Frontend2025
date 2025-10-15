@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario Completo</title>
+    <style>
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Formulario de Registro Completo</h2>
+
+    <form action="/registro" method="POST" enctype="multipart/form-data">
+      <!-- Texto -->
+      <div class="form-group">
+        <label for="nombre-completo">Nombre Completo:</label>
+        <input
+          type="text"
+          id="nombre-completo"
+          name="nombreCompleto"
+          placeholder="Juan Pérez"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="correo">Email:</label>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          placeholder="ejemplo@correo.com"
+          required
+        />
+      </div>
+
+      <!-- Número -->
+      <div class="form-group">
+        <label for="edad">Edad:</label>
+        <input
+          type="number"
+          id="edad"
+          name="edad"
+          min="18"
+          max="100"
+          value="25"
+        />
+      </div>
+
+      <!-- Teléfono -->
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input
+          type="tel"
+          id="telefono"
+          name="telefono"
+          pattern="[0-9]{9}"
+          placeholder="912345678"
+        />
+      </div>
+
+      <!-- URL -->
+      <div class="form-group">
+        <label for="sitio-web">Sitio Web:</label>
+        <input
+          type="url"
+          id="sitio-web"
+          name="sitioWeb"
+          placeholder="https://www.ejemplo.com"
+        />
+      </div>
+
+      <!-- Fecha -->
+      <div class="form-group">
+        <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha-nacimiento" name="fechaNacimiento" />
+      </div>
+
+      <!-- Hora -->
+      <div class="form-group">
+        <label for="hora-reunion">Hora de Reunión:</label>
+        <input type="time" id="hora-reunion" name="horaReunion" />
+      </div>
+
+      <!-- Color -->
+      <div class="form-group">
+        <label for="color-favorito">Color Favorito:</label>
+        <input
+          type="color"
+          id="color-favorito"
+          name="colorFavorito"
+          value="#4CAF50"
+        />
+      </div>
+
+      <!-- Range (deslizador) -->
+      <div class="form-group">
+        <label for="nivel-experiencia">Nivel de Experiencia:</label>
+        <input
+          type="range"
+          id="nivel-experiencia"
+          name="nivelExperiencia"
+          min="0"
+          max="10"
+          value="5"
+        />
+        <span id="valor-range">5</span>
+      </div>
+
+      <!-- Radio buttons -->
+      <div class="form-group">
+        <label>Género:</label>
+        <input type="radio" id="masculino" name="genero" value="masculino" />
+        <label for="masculino" style="width: auto">Masculino</label>
+
+        <input type="radio" id="femenino" name="genero" value="femenino" />
+        <label for="femenino" style="width: auto">Femenino</label>
+
+        <input type="radio" id="otro" name="genero" value="otro" />
+        <label for="otro" style="width: auto">Otro</label>
+      </div>
+
+      <!-- Checkboxes -->
+      <div class="form-group">
+        <label>Tecnologías:</label><br />
+        <input type="checkbox" id="html" name="tecnologias" value="html" />
+        <label for="html" style="width: auto">HTML</label><br />
+
+        <input type="checkbox" id="css" name="tecnologias" value="css" />
+        <label for="css" style="width: auto">CSS</label><br />
+
+        <input
+          type="checkbox"
+          id="javascript"
+          name="tecnologias"
+          value="javascript"
+        />
+        <label for="javascript" style="width: auto">JavaScript</label><br />
+
+        <input type="checkbox" id="vue" name="tecnologias" value="vue" />
+        <label for="vue" style="width: auto">Vue.js</label>
+      </div>
+
+      <!-- Select (desplegable) -->
+      <div class="form-group">
+        <label for="pais">País:</label>
+        <select id="pais" name="pais" required>
+          <option value="">Seleccione un país</option>
+          <option value="chile">Chile</option>
+          <option value="argentina">Argentina</option>
+          <option value="peru">Perú</option>
+          <option value="colombia">Colombia</option>
+          <option value="mexico">México</option>
+        </select>
+      </div>
+
+      <!-- Select múltiple -->
+      <div class="form-group">
+        <label for="lenguajes">Lenguajes (Ctrl+Click):</label>
+        <select id="lenguajes" name="lenguajes" multiple size="4">
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="java">Java</option>
+          <option value="php">PHP</option>
+        </select>
+      </div>
+
+      <!-- File upload -->
+      <div class="form-group">
+        <label for="curriculum">Curriculum (PDF):</label>
+        <input type="file" id="curriculum" name="curriculum" accept=".pdf" />
+      </div>
+
+      <!-- Hidden input -->
+      <input type="hidden" name="id-formulario" value="12345" />
+
+      <!-- Textarea -->
+      <div class="form-group">
+        <label for="comentarios">Comentarios:</label><br />
+        <textarea
+          id="comentarios"
+          name="comentarios"
+          rows="5"
+          cols="50"
+          placeholder="Escribe tus comentarios aquí..."
+        ></textarea>
+      </div>
+
+      <!-- Checkbox de términos -->
+      <div class="form-group">
+        <input type="checkbox" id="terminos" name="terminos" required />
+        <label for="terminos" style="width: auto">
+          Acepto los términos y condiciones
+        </label>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-group">
+        <button type="submit">Registrarse</button>
+        <button type="reset">Limpiar Formulario</button>
+      </div>
+    </form>
+
+    <script>
+      // Actualizar valor del range en tiempo real
+      const rangeInput = document.getElementById("nivel-experiencia");
+      const valorRange = document.getElementById("valor-range");
+
+      rangeInput.addEventListener("input", function () {
+        valorRange.textContent = this.value;
+      });
+    </script>
+  </body>
+</html>
