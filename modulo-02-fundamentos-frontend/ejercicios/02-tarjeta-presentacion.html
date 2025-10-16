@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tarjeta de Presentación</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos del body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Contenedor de la tarjeta */
+        .tarjeta {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: aparecer 0.6s ease-out;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Encabezado de la tarjeta */
+        .tarjeta-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Foto de perfil */
+        .foto-perfil {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 20px;
+        }
+
+        /* Nombre */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Subtítulo */
+        .subtitulo {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Contenido de la tarjeta */
+        .tarjeta-contenido {
+            padding: 30px;
+        }
+
+        /* Sección "Sobre mí" */
+        .sobre-mi {
+            margin-bottom: 30px;
+        }
+
+        .sobre-mi h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sobre-mi p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Sección de hobbies */
+        .hobbies {
+            margin-bottom: 20px;
+        }
+
+        .hobbies h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Lista de hobbies */
+        .hobbies ul {
+            list-style: none;
+        }
+
+        .hobbies li {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #333;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .hobbies li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hobbies li::before {
+            content: "✨";
+            font-size: 1.5rem;
+        }
+
+        /* Footer de la tarjeta */
+        .tarjeta-footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Iconos de redes sociales */
+        .redes-sociales {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .redes-sociales a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .redes-sociales a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .foto-perfil {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .tarjeta-contenido {
+                padding: 20px;
+            }
+
+            .hobbies li:hover {
+                transform: translateX(5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta">
+        <!-- Encabezado con foto y nombre -->
+        <div class="tarjeta-header">
+            <!-- Foto de perfil (usando emoji como placeholder) -->
+            <div class="foto-perfil">
+                👨‍💻
+            </div>
+            
+            <!-- Nombre -->
+            <h1>Eduardo Javier</h1>
+            <p class="subtitulo">Desarrollador Frontend en Formación</p>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="tarjeta-contenido">
+            <!-- Sección: Sobre mí -->
+            <div class="sobre-mi">
+                <h2>📝 Sobre mí</h2>
+                <p>
+                    ¡Hola! Soy Eduardo, un apasionado estudiante de desarrollo web frontend. 
+                    Actualmente estoy aprendiendo HTML, CSS y JavaScript con el objetivo de 
+                    crear experiencias web modernas y accesibles. Me encanta resolver problemas 
+                    y transformar ideas en realidad a través del código.
+                </p>
+            </div>
+
+            <!-- Sección: Hobbies e intereses -->
+            <div class="hobbies">
+                <h2>🎯 Mis Hobbies e Intereses</h2>
+                <ul>
+                    <li>
+                        <strong>Programación Web:</strong> Aprender nuevas tecnologías y frameworks modernos
+                    </li>
+                    <li>
+                        <strong>Diseño UI/UX:</strong> Crear interfaces intuitivas y atractivas para usuarios
+                    </li>
+                    <li>
+                        <strong>Tecnología:</strong> Estar al día con las últimas tendencias en desarrollo web
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="tarjeta-footer">
+            <p>📍 Estudiando desde casa | 📧 contacto@ejemplo.com</p>
+            
+            <!-- Redes sociales (enlaces de ejemplo) -->
+            <div class="redes-sociales">
+                <a href="#" title="GitHub" aria-label="GitHub">🐙</a>
+                <a href="#" title="LinkedIn" aria-label="LinkedIn">💼</a>
+                <a href="#" title="Twitter" aria-label="Twitter">🐦</a>
+                <a href="#" title="Portfolio" aria-label="Portfolio">🌐</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
