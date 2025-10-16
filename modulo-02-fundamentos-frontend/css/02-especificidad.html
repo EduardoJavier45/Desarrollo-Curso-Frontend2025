@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02 - Especificidad CSS</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      header {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      main {
+        padding: 40px;
+      }
+
+      section {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      h2 {
+        color: #f5576c;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #f5576c;
+        padding-bottom: 10px;
+      }
+
+      h3 {
+        color: #f093fb;
+        margin: 25px 0 15px 0;
+      }
+
+      /* ========================================
+           EJEMPLOS DE ESPECIFICIDAD
+           ======================================== */
+
+      /* Ejemplo 1: Elemento vs Clase vs ID */
+
+      /* Especificidad: 0,0,0,1 = 1 */
+      p {
+        color: black;
+      }
+
+      /* Especificidad: 0,0,1,0 = 10 - GANA sobre p */
+      .texto {
+        color: blue;
+      }
+
+      /* Especificidad: 0,1,0,0 = 100 - GANA sobre .texto */
+      #parrafo-especial {
+        color: red;
+      }
+
+      /* Ejemplo 2: Combinaciones */
+
+      /* Especificidad: 0,0,0,2 = 2 */
+      div p {
+        font-size: 14px;
+      }
+
+      /* Especificidad: 0,0,1,1 = 11 - GANA */
+      div .contenido {
+        font-size: 18px;
+      }
+
+      /* Especificidad: 0,1,0,1 = 101 - GANA */
+      #contenedor p {
+        font-size: 20px;
+      }
+
+      /* Ejemplo 3: Múltiples clases */
+
+      /* Especificidad: 0,0,1,0 = 10 */
+      .caja {
+        background-color: lightgray;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      /* Especificidad: 0,0,2,0 = 20 - GANA */
+      .caja.importante {
+        background-color: #fff3cd;
+        border: 2px solid #ffc107;
+      }
+
+      /* Especificidad: 0,0,3,0 = 30 - GANA */
+      .caja.importante.urgente {
+        background-color: #f8d7da;
+        border: 2px solid #dc3545;
+      }
+
+      /* Ejemplo 4: Orden de aparición (mismo peso) */
+
+      .color-prueba {
+        color: blue;
+      }
+
+      .color-prueba {
+        color: green; /* Esta gana (es la última) */
+      }
+
+      /* Ejemplo 5: !important (EVITAR) */
+
+      .normal {
+        color: blue;
+      }
+
+      .forzado {
+        color: red !important; /* Máxima prioridad */
+      }
+
+      /* Incluso un ID no puede ganarle a !important */
+      #texto-forzado {
+        color: green; /* NO se aplicará */
+      }
+
+      /* Ejemplo 6: Herencia vs Especificidad */
+
+      .contenedor-padre {
+        color: purple;
+      }
+
+      .contenedor-padre p {
+        /* Hereda el color purple, pero puede ser sobrescrito */
+      }
+
+      /* Ejemplo 7: Selectores complejos */
+
+      /* Especificidad: 0,0,1,2 = 12 */
+      nav ul li {
+        color: #333;
+      }
+
+      /* Especificidad: 0,0,2,1 = 21 - GANA */
+      nav .menu-item.activo {
+        color: #f5576c;
+        font-weight: bold;
+      }
+
+      /* Especificidad: 0,1,1,1 = 111 - GANA */
+      #navegacion .menu-item.activo {
+        color: #f093fb;
+      }
+
+      /* ========================================
+           TABLA DE ESPECIFICIDAD
+           ======================================== */
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+      }
+
+      thead {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+      }
+
+      tbody tr:hover {
+        background-color: #e9ecef;
+      }
+
+      code {
+        background-color: #f8f9fa;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        color: #e83e8c;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+
+      .ejemplo {
+        background: white;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        border: 2px solid #dee2e6;
+      }
+
+      .resultado {
+        background: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin: 0 5px;
+      }
+
+      .badge-low {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .badge-medium {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+
+      .badge-high {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .badge-ultra {
+        background-color: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .visual-spec {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+        align-items: center;
+      }
+
+      .spec-box {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .spec-a {
+        background-color: #dc3545;
+      }
+      .spec-b {
+        background-color: #fd7e14;
+      }
+      .spec-c {
+        background-color: #ffc107;
+      }
+      .spec-d {
+        background-color: #28a745;
+      }
+
+      footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .calculadora {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .calc-input {
+        background: white;
+        color: #333;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+      }
+
+      .calc-input input {
+        width: 60px;
+        padding: 8px;
+        margin: 0 10px;
+        border: 2px solid #667eea;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      .calc-result {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>⚖️ Especificidad en CSS</h1>
+        <p>Entendiendo cómo CSS decide qué estilos aplicar</p>
+      </header>
+
+      <main>
+        <!-- Introducción -->
+        <section>
+          <h2>¿Qué es la Especificidad?</h2>
+          <p>
+            La <strong>especificidad</strong> es el mecanismo que usa CSS para
+            determinar qué regla se aplica cuando múltiples reglas afectan al
+            mismo elemento.
+          </p>
+
+          <p>
+            Piensa en ella como un "peso" o "puntuación" que se calcula para
+            cada selector.
+            <strong>El selector con mayor especificidad gana.</strong>
+          </p>
+
+          <div class="resultado">
+            <strong>Regla de oro:</strong> Cuanto más específico es un selector,
+            mayor prioridad tiene.
+          </div>
+        </section>
+
+        <!-- Cálculo de Especificidad -->
+        <section>
+          <h2>Cálculo de Especificidad</h2>
+          <p>
+            La especificidad se representa con 4 números:
+            <strong>(a, b, c, d)</strong>
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Valor</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>a</strong></td>
+                <td>1000</td>
+                <td>Estilos en línea</td>
+                <td><code>style="color: red;"</code></td>
+              </tr>
+              <tr>
+                <td><strong>b</strong></td>
+                <td>100</td>
+                <td>IDs</td>
+                <td><code>#principal</code></td>
+              </tr>
+              <tr>
+                <td><strong>c</strong></td>
+                <td>10</td>
+                <td>Clases, atributos, pseudo-clases</td>
+                <td>
+                  <code>.menu</code>, <code>[type="text"]</code>,
+                  <code>:hover</code>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>d</strong></td>
+                <td>1</td>
+                <td>Elementos, pseudo-elementos</td>
+                <td><code>p</code>, <code>div</code>, <code>::before</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Visualización:</h3>
+          <div class="visual-spec">
+            <div class="spec-box spec-a">a</div>
+            <div class="spec-box spec-b">b</div>
+            <div class="spec-box spec-c">c</div>
+            <div class="spec-box spec-d">d</div>
+          </div>
+          <p style="text-align: center; color: #666; font-style: italic">
+            a=1000, b=100, c=10, d=1
+          </p>
+        </section>
+
+        <!-- Ejemplos Prácticos -->
+        <section>
+          <h2>Ejemplos Prácticos de Especificidad</h2>
+
+          <h3>Ejemplo 1: Elemento vs Clase vs ID</h3>
+          <div class="ejemplo">
+            <pre><code>/* Especificidad: 0,0,0,1 = 1 */
+p { color: black; }
+
+/* Especificidad: 0,0,1,0 = 10 */
+.texto { color: blue; }
+
+/* Especificidad: 0,1,0,0 = 100 */
+#parrafo-especial { color: red; }</code></pre>
+
+            <p>Párrafo normal (negro)</p>
+            <p class="texto">Párrafo con clase (azul)</p>
+            <p id="parrafo-especial" class="texto">
+              Párrafo con ID y clase (rojo - ID gana)
+            </p>
+          </div>
+
+          <h3>Ejemplo 2: Múltiples Clases</h3>
+          <div class="ejemplo">
+            <pre><code>/* Especificidad: 0,0,1,0 = 10 */
+.caja { background-color: lightgray; }
+
+/* Especificidad: 0,0,2,0 = 20 */
+.caja.importante { background-color: yellow; }
+
+/* Especificidad: 0,0,3,0 = 30 */
+.caja.importante.urgente { background-color: red; }</code></pre>
+
+            <div class="caja">Una clase (gris)</div>
+            <div class="caja importante">Dos clases (amarillo)</div>
+            <div class="caja importante urgente">Tres clases (rojo)</div>
+          </div>
+
+          <h3>Ejemplo 3: Orden de Aparición (Empate)</h3>
+          <div class="ejemplo">
+            <pre><code>/* Ambas tienen especificidad: 0,0,1,0 = 10 */
+.color-prueba { color: blue; }
+.color-prueba { color: green; } /* Esta gana (última) */</code></pre>
+
+            <p class="color-prueba">
+              Este texto será verde (segunda regla gana)
+            </p>
+          </div>
+
+          <h3>Ejemplo 4: !important (El Tramposo)</h3>
+          <div class="ejemplo">
+            <pre><code>.normal { color: blue; }
+#texto-forzado { color: green; }
+.forzado { color: red !important; } /* GANA SIEMPRE */</code></pre>
+
+            <p class="normal">Texto azul (clase normal)</p>
+            <p id="texto-forzado" class="forzado">
+              Texto rojo (¡important gana sobre ID!)
+            </p>
+
+            <div
+              class="resultado"
+              style="background-color: #f8d7da; border-color: #dc3545"
+            >
+              <strong>⚠️ ADVERTENCIA:</strong> Evita usar
+              <code>!important</code>. Rompe la cascada natural y dificulta el
+              mantenimiento.
+            </div>
+          </div>
+        </section>
+
+        <!-- Tabla de Comparación -->
+        <section>
+          <h2>Tabla de Comparación de Selectores</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Selector</th>
+                <th>Especificidad (a,b,c,d)</th>
+                <th>Valor Total</th>
+                <th>Prioridad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>*</code></td>
+                <td>0,0,0,0</td>
+                <td>0</td>
+                <td><span class="badge badge-low">Muy baja</span></td>
+              </tr>
+              <tr>
+                <td><code>p</code></td>
+                <td>0,0,0,1</td>
+                <td>1</td>
+                <td><span class="badge badge-low">Baja</span></td>
+              </tr>
+              <tr>
+                <td><code>.clase</code></td>
+                <td>0,0,1,0</td>
+                <td>10</td>
+                <td><span class="badge badge-medium">Media</span></td>
+              </tr>
+              <tr>
+                <td><code>p.clase</code></td>
+                <td>0,0,1,1</td>
+                <td>11</td>
+                <td><span class="badge badge-medium">Media</span></td>
+              </tr>
+              <tr>
+                <td><code>.clase1.clase2</code></td>
+                <td>0,0,2,0</td>
+                <td>20</td>
+                <td><span class="badge badge-medium">Media-Alta</span></td>
+              </tr>
+              <tr>
+                <td><code>#id</code></td>
+                <td>0,1,0,0</td>
+                <td>100</td>
+                <td><span class="badge badge-high">Alta</span></td>
+              </tr>
+              <tr>
+                <td><code>#id .clase</code></td>
+                <td>0,1,1,0</td>
+                <td>110</td>
+                <td><span class="badge badge-high">Alta</span></td>
+              </tr>
+              <tr>
+                <td><code>#id p.clase</code></td>
+                <td>0,1,1,1</td>
+                <td>111</td>
+                <td><span class="badge badge-high">Muy Alta</span></td>
+              </tr>
+              <tr>
+                <td><code>style=""</code></td>
+                <td>1,0,0,0</td>
+                <td>1000</td>
+                <td><span class="badge badge-ultra">Ultra Alta</span></td>
+              </tr>
+              <tr>
+                <td><code>!important</code></td>
+                <td>∞</td>
+                <td>∞</td>
+                <td><span class="badge badge-ultra">Máxima</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Calculadora Visual -->
+        <section>
+          <h2>Calculadora de Especificidad</h2>
+          <p>Practica calculando la especificidad de diferentes selectores:</p>
+
+          <div class="calculadora">
+            <h3 style="margin-bottom: 20px">Ejemplos de Cálculo:</h3>
+
+            <div class="calc-input">
+              <strong>Selector:</strong> <code>div p</code><br />
+              <strong>Cálculo:</strong>
+              <span
+                class="spec-box spec-a"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-b"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-c"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-d"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >2</span
+              >
+              <strong>= 2</strong>
+            </div>
+
+            <div class="calc-input">
+              <strong>Selector:</strong> <code>.menu li a:hover</code><br />
+              <strong>Cálculo:</strong>
+              <span
+                class="spec-box spec-a"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-b"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-c"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >2</span
+              >
+              <span
+                class="spec-box spec-d"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >2</span
+              >
+              <strong>= 22</strong>
+              <br /><small>(1 clase + 1 pseudo-clase + 2 elementos)</small>
+            </div>
+
+            <div class="calc-input">
+              <strong>Selector:</strong> <code>#header nav.main-menu a</code
+              ><br />
+              <strong>Cálculo:</strong>
+              <span
+                class="spec-box spec-a"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >0</span
+              >
+              <span
+                class="spec-box spec-b"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >1</span
+              >
+              <span
+                class="spec-box spec-c"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >1</span
+              >
+              <span
+                class="spec-box spec-d"
+                style="
+                  width: 40px;
+                  height: 40px;
+                  font-size: 1rem;
+                  display: inline-flex;
+                "
+                >2</span
+              >
+              <strong>= 112</strong>
+              <br /><small>(1 ID + 1 clase + 2 elementos)</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reglas y Consejos -->
+        <section>
+          <h2>Reglas y Mejores Prácticas</h2>
+
+          <h3>✅ Buenas Prácticas:</h3>
+          <ul style="line-height: 2">
+            <li>Usa <strong>clases</strong> para estilos reutilizables</li>
+            <li>Reserva <strong>IDs</strong> para JavaScript y anclas</li>
+            <li>
+              Mantén la <strong>especificidad baja</strong> (más fácil de
+              sobrescribir)
+            </li>
+            <li>
+              Evita selectores demasiado anidados (<code>div > ul > li > a</code
+              >)
+            </li>
+            <li>
+              Usa metodologías como <strong>BEM</strong> para organizar clases
+            </li>
+            <li>
+              Prefiere especificidad por <strong>clases múltiples</strong> sobre
+              IDs
+            </li>
+          </ul>
+
+          <h3>❌ Malas Prácticas:</h3>
+          <ul style="line-height: 2">
+            <li>Usar <code>!important</code> para "solucionar" problemas</li>
+            <li>Selectores excesivamente específicos</li>
+            <li>Mezclar estilos en línea con CSS externo</li>
+            <li>Usar IDs para estilos (muy alta especificidad)</li>
+            <li>No entender por qué un estilo no se aplica</li>
+          </ul>
+
+          <div class="resultado">
+            <strong>💡 Consejo profesional:</strong> Si necesitas sobrescribir
+            un estilo, aumenta la especificidad de forma lógica en lugar de usar
+            <code>!important</code>.
+          </div>
+        </section>
+
+        <!-- Cascada -->
+        <section>
+          <h2>Orden de Prioridad (Cascada Completa)</h2>
+          <p>Cuando hay conflicto, CSS decide en este orden:</p>
+
+          <ol style="line-height: 2.5; font-size: 1.1rem">
+            <li>
+              <strong>Importancia:</strong> <code>!important</code> del autor >
+              normal
+            </li>
+            <li>
+              <strong>Especificidad:</strong> ID (100) > Clase (10) > Elemento
+              (1)
+            </li>
+            <li>
+              <strong>Orden de aparición:</strong> La última regla gana (en
+              empates)
+            </li>
+            <li><strong>Herencia:</strong> Propiedades heredadas de padres</li>
+          </ol>
+
+          <div class="ejemplo">
+            <h4>Ejemplo completo:</h4>
+            <pre><code>/* 1. Específico pero primero */
+#texto { color: blue; }          /* 0,1,0,0 = 100 */
+
+/* 2. Menos específico */
+.parrafo { color: green; }       /* 0,0,1,0 = 10 */
+
+/* 3. Más específico - GANA */
+#texto.parrafo { color: red; }   /* 0,1,1,0 = 110 */
+
+/* 4. Máxima prioridad - GANA SOBRE TODO */
+.parrafo { color: yellow !important; }</code></pre>
+
+            <p>El texto será <strong>amarillo</strong> (por !important)</p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p><strong>Módulo 2 - Fundamentos Frontend</strong></p>
+        <p>Especificidad CSS - Guía Completa</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8">
+          📚 Ver notas:
+          <code>css/01-notas-css3-introduccion-selectores.md</code>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

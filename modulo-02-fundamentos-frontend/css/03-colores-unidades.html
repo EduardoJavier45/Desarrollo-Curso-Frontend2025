@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03 - Colores y Unidades CSS</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      main {
+        padding: 40px;
+      }
+
+      section {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      h2 {
+        color: #764ba2;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #764ba2;
+        padding-bottom: 10px;
+      }
+
+      h3 {
+        color: #667eea;
+        margin: 25px 0 15px 0;
+      }
+
+      /* ========================================
+           EJEMPLOS DE COLORES
+           ======================================== */
+
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .color-box {
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+
+      .color-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .color-code {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 8px;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        font-family: "Courier New", monospace;
+      }
+
+      /* Nombres de colores */
+      .color-red {
+        background-color: red;
+      }
+      .color-blue {
+        background-color: blue;
+      }
+      .color-green {
+        background-color: green;
+      }
+      .color-orange {
+        background-color: orange;
+      }
+      .color-purple {
+        background-color: purple;
+      }
+      .color-teal {
+        background-color: teal;
+      }
+
+      /* Hexadecimales */
+      .color-hex1 {
+        background-color: #ff6b6b;
+      }
+      .color-hex2 {
+        background-color: #4ecdc4;
+      }
+      .color-hex3 {
+        background-color: #45b7d1;
+      }
+      .color-hex4 {
+        background-color: #f38181;
+      }
+      .color-hex5 {
+        background-color: #aa96da;
+      }
+      .color-hex6 {
+        background-color: #fcbad3;
+      }
+
+      /* RGB */
+      .color-rgb1 {
+        background-color: rgb(255, 107, 107);
+      }
+      .color-rgb2 {
+        background-color: rgb(78, 205, 196);
+      }
+      .color-rgb3 {
+        background-color: rgb(69, 183, 209);
+      }
+
+      /* RGBA con transparencias */
+      .color-rgba1 {
+        background-color: rgba(255, 107, 107, 0.8);
+        color: #333;
+      }
+      .color-rgba2 {
+        background-color: rgba(78, 205, 196, 0.6);
+        color: #333;
+      }
+      .color-rgba3 {
+        background-color: rgba(69, 183, 209, 0.4);
+        color: #333;
+      }
+
+      /* HSL */
+      .color-hsl1 {
+        background-color: hsl(0, 100%, 71%);
+      }
+      .color-hsl2 {
+        background-color: hsl(174, 59%, 55%);
+      }
+      .color-hsl3 {
+        background-color: hsl(194, 59%, 54%);
+      }
+
+      /* HSLA */
+      .color-hsla1 {
+        background-color: hsla(0, 100%, 71%, 0.7);
+        color: #333;
+      }
+      .color-hsla2 {
+        background-color: hsla(174, 59%, 55%, 0.7);
+        color: #333;
+      }
+
+      /* ========================================
+           EJEMPLOS DE UNIDADES
+           ======================================== */
+
+      .units-demo {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 10px;
+        border: 2px solid #dee2e6;
+      }
+
+      /* Unidades Absolutas */
+      .px-example {
+        font-size: 16px;
+        background-color: #e3f2fd;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .pt-example {
+        font-size: 12pt;
+        background-color: #f3e5f5;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .cm-example {
+        width: 5cm;
+        background-color: #e8f5e9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      /* Unidades Relativas */
+      .parent-em {
+        font-size: 16px;
+        background-color: #fff3e0;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .child-em {
+        font-size: 1.5em; /* 1.5 * 16px = 24px */
+        background-color: #ffe0b2;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .grandchild-em {
+        font-size: 1.5em; /* 1.5 * 24px = 36px */
+        background-color: #ffcc80;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      /* REM */
+      .rem-1 {
+        font-size: 1rem; /* 16px */
+        background-color: #e1f5fe;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+
+      .rem-2 {
+        font-size: 1.5rem; /* 24px */
+        background-color: #b3e5fc;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+
+      .rem-3 {
+        font-size: 2rem; /* 32px */
+        background-color: #81d4fa;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+
+      /* Porcentajes */
+      .percent-parent {
+        width: 100%;
+        background-color: #f1f8e9;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .percent-50 {
+        width: 50%;
+        background-color: #c5e1a5;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .percent-75 {
+        width: 75%;
+        background-color: #aed581;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      /* Viewport Units */
+      .vw-example {
+        width: 50vw; /* 50% del ancho del viewport */
+        background-color: #fce4ec;
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .vh-example {
+        height: 20vh; /* 20% de la altura del viewport */
+        background-color: #f8bbd0;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .vmin-example {
+        width: 30vmin;
+        height: 30vmin;
+        background-color: #f48fb1;
+        margin: 10px auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* Tabla de comparación */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+      }
+
+      thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #f8f9fa;
+      }
+
+      tbody tr:hover {
+        background-color: #e9ecef;
+      }
+
+      code {
+        background-color: #f8f9fa;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        color: #e83e8c;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+
+      .resultado {
+        background: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+      }
+
+      .interactive-demo {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        padding: 25px;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .color-mixer {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .slider-group {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .slider-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .slider-group input[type="range"] {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        outline: none;
+      }
+
+      .slider-group input[type="range"]::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #667eea;
+        cursor: pointer;
+      }
+
+      .preview-box {
+        height: 150px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎨 Colores y Unidades en CSS</h1>
+        <p>Aprende a dar estilo con colores y medidas</p>
+      </header>
+
+      <main>
+        <!-- COLORES -->
+        <section>
+          <h2>🌈 Formatos de Colores en CSS</h2>
+          <p>
+            CSS ofrece múltiples formas de definir colores. Cada una tiene sus
+            ventajas:
+          </p>
+
+          <!-- Nombres de colores -->
+          <h3>1. Nombres de Colores (140 predefinidos)</h3>
+          <div class="color-grid">
+            <div class="color-box color-red">
+              RED
+              <div class="color-code">color: red;</div>
+            </div>
+            <div class="color-box color-blue">
+              BLUE
+              <div class="color-code">color: blue;</div>
+            </div>
+            <div class="color-box color-green">
+              GREEN
+              <div class="color-code">color: green;</div>
+            </div>
+            <div class="color-box color-orange">
+              ORANGE
+              <div class="color-code">color: orange;</div>
+            </div>
+            <div class="color-box color-purple">
+              PURPLE
+              <div class="color-code">color: purple;</div>
+            </div>
+            <div class="color-box color-teal">
+              TEAL
+              <div class="color-code">color: teal;</div>
+            </div>
+          </div>
+
+          <div class="resultado">
+            <strong>💡 Ventaja:</strong> Fáciles de recordar y escribir.<br />
+            <strong>⚠️ Desventaja:</strong> Solo 140 colores disponibles,
+            limitado para diseños personalizados.
+          </div>
+
+          <!-- Hexadecimal -->
+          <h3>2. Hexadecimal (#RRGGBB)</h3>
+          <p>
+            El formato más popular. Usa números hexadecimales (0-9, A-F) para
+            definir Rojo-Verde-Azul:
+          </p>
+          <div class="color-grid">
+            <div class="color-box color-hex1">
+              #FF6B6B
+              <div class="color-code">color: #FF6B6B;</div>
+            </div>
+            <div class="color-box color-hex2">
+              #4ECDC4
+              <div class="color-code">color: #4ECDC4;</div>
+            </div>
+            <div class="color-box color-hex3">
+              #45B7D1
+              <div class="color-code">color: #45B7D1;</div>
+            </div>
+            <div class="color-box color-hex4">
+              #F38181
+              <div class="color-code">color: #F38181;</div>
+            </div>
+            <div class="color-box color-hex5">
+              #AA96DA
+              <div class="color-code">color: #AA96DA;</div>
+            </div>
+            <div class="color-box color-hex6">
+              #FCBAD3
+              <div class="color-code">color: #FCBAD3;</div>
+            </div>
+          </div>
+
+          <pre><code>/* Formato completo: #RRGGBB */
+color: #FF6B6B;  /* RR=FF (rojo), GG=6B (verde), BB=6B (azul) */
+
+/* Formato corto: #RGB (se duplica cada dígito) */
+color: #F00;     /* Equivalente a #FF0000 */
+color: #0F0;     /* Equivalente a #00FF00 */</code></pre>
+
+          <div class="resultado">
+            <strong>💡 Ventaja:</strong> 16.7 millones de colores disponibles,
+            formato estándar.<br />
+            <strong>⚠️ Desventaja:</strong> No soporta transparencia (usar
+            #RRGGBBAA en CSS moderno).
+          </div>
+
+          <!-- RGB -->
+          <h3>3. RGB - Red, Green, Blue</h3>
+          <p>Define colores con valores de 0 a 255 para cada canal:</p>
+          <div class="color-grid">
+            <div class="color-box color-rgb1">
+              RGB(255, 107, 107)
+              <div class="color-code">rgb(255, 107, 107)</div>
+            </div>
+            <div class="color-box color-rgb2">
+              RGB(78, 205, 196)
+              <div class="color-code">rgb(78, 205, 196)</div>
+            </div>
+            <div class="color-box color-rgb3">
+              RGB(69, 183, 209)
+              <div class="color-code">rgb(69, 183, 209)</div>
+            </div>
+          </div>
+
+          <pre><code>color: rgb(255, 107, 107);  /* Rojo=255, Verde=107, Azul=107 */
+color: rgb(0, 0, 0);        /* Negro */
+color: rgb(255, 255, 255);  /* Blanco */</code></pre>
+
+          <!-- RGBA -->
+          <h3>4. RGBA - RGB con Alpha (Transparencia)</h3>
+          <p>
+            Igual que RGB pero con un cuarto valor (0.0 a 1.0) para la opacidad:
+          </p>
+          <div class="color-grid">
+            <div class="color-box color-rgba1">
+              RGBA 80%
+              <div class="color-code">rgba(255, 107, 107, 0.8)</div>
+            </div>
+            <div class="color-box color-rgba2">
+              RGBA 60%
+              <div class="color-code">rgba(78, 205, 196, 0.6)</div>
+            </div>
+            <div class="color-box color-rgba3">
+              RGBA 40%
+              <div class="color-code">rgba(69, 183, 209, 0.4)</div>
+            </div>
+          </div>
+
+          <pre><code>background: rgba(255, 107, 107, 0.8);  /* 80% opaco */
+background: rgba(0, 0, 0, 0.5);        /* Negro semi-transparente */
+background: rgba(255, 255, 255, 0.1);  /* Blanco casi transparente */</code></pre>
+
+          <div class="resultado">
+            <strong>💡 Ventaja:</strong> Permite transparencias, ideal para
+            overlays.<br />
+            <strong>✅ Uso común:</strong> Fondos semi-transparentes, sombras,
+            capas.
+          </div>
+
+          <!-- HSL -->
+          <h3>5. HSL - Hue, Saturation, Lightness</h3>
+          <p>
+            Más intuitivo para diseñadores: Tono (0-360°), Saturación (0-100%),
+            Luminosidad (0-100%)
+          </p>
+          <div class="color-grid">
+            <div class="color-box color-hsl1">
+              HSL(0, 100%, 71%)
+              <div class="color-code">hsl(0, 100%, 71%)</div>
+            </div>
+            <div class="color-box color-hsl2">
+              HSL(174, 59%, 55%)
+              <div class="color-code">hsl(174, 59%, 55%)</div>
+            </div>
+            <div class="color-box color-hsl3">
+              HSL(194, 59%, 54%)
+              <div class="color-code">hsl(194, 59%, 54%)</div>
+            </div>
+          </div>
+
+          <pre><code>/* Tono (Hue): 0=rojo, 120=verde, 240=azul */
+color: hsl(0, 100%, 50%);    /* Rojo puro */
+color: hsl(120, 100%, 50%);  /* Verde puro */
+color: hsl(240, 100%, 50%);  /* Azul puro */
+
+/* Saturación: 0%=gris, 100%=color puro */
+color: hsl(0, 0%, 50%);      /* Gris */
+color: hsl(0, 50%, 50%);     /* Rojo desaturado */
+color: hsl(0, 100%, 50%);    /* Rojo saturado */
+
+/* Luminosidad: 0%=negro, 50%=normal, 100%=blanco */
+color: hsl(0, 100%, 0%);     /* Negro */
+color: hsl(0, 100%, 50%);    /* Rojo normal */
+color: hsl(0, 100%, 100%);   /* Blanco */</code></pre>
+
+          <!-- HSLA -->
+          <h3>6. HSLA - HSL con Alpha</h3>
+          <div class="color-grid">
+            <div class="color-box color-hsla1">
+              HSLA 70%
+              <div class="color-code">hsla(0, 100%, 71%, 0.7)</div>
+            </div>
+            <div class="color-box color-hsla2">
+              HSLA 70%
+              <div class="color-code">hsla(174, 59%, 55%, 0.7)</div>
+            </div>
+          </div>
+
+          <div class="resultado">
+            <strong>💡 Ventaja HSL:</strong> Fácil crear variaciones (más
+            claro/oscuro, más/menos saturado).<br />
+            <strong>✅ Ideal para:</strong> Temas de color, paletas, variaciones
+            automáticas.
+          </div>
+        </section>
+
+        <!-- UNIDADES -->
+        <section>
+          <h2>📏 Unidades de Medida en CSS</h2>
+
+          <h3>📌 Unidades Absolutas (tamaño fijo)</h3>
+
+          <h4>Píxeles (px)</h4>
+          <div class="units-demo">
+            <div class="px-example">Este texto tiene 16px de tamaño</div>
+            <pre><code>font-size: 16px;
+width: 300px;
+padding: 20px;</code></pre>
+            <div class="resultado">
+              <strong>✅ Uso:</strong> Cuando necesitas precisión exacta.<br />
+              <strong>⚠️ Problema:</strong> No escala con las preferencias del
+              usuario.
+            </div>
+          </div>
+
+          <h4>Puntos (pt)</h4>
+          <div class="units-demo">
+            <div class="pt-example">
+              Este texto tiene 12pt de tamaño (para impresión)
+            </div>
+            <pre><code>font-size: 12pt;  /* 1pt = 1/72 de pulgada */</code></pre>
+            <div class="resultado">
+              <strong>✅ Uso:</strong> Estilos de impresión (@media print).<br />
+              <strong>❌ No usar:</strong> Para pantallas (usar px, rem, em).
+            </div>
+          </div>
+
+          <h4>Centímetros (cm)</h4>
+          <div class="units-demo">
+            <div class="cm-example">
+              Esta caja tiene 5cm de ancho (en impresión)
+            </div>
+            <pre><code>width: 5cm;  /* Útil para impresión */</code></pre>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Unidad</th>
+                <th>Nombre</th>
+                <th>Uso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>px</code></td>
+                <td>Píxeles</td>
+                <td>General, web</td>
+              </tr>
+              <tr>
+                <td><code>pt</code></td>
+                <td>Puntos</td>
+                <td>Impresión</td>
+              </tr>
+              <tr>
+                <td><code>cm</code></td>
+                <td>Centímetros</td>
+                <td>Impresión</td>
+              </tr>
+              <tr>
+                <td><code>mm</code></td>
+                <td>Milímetros</td>
+                <td>Impresión</td>
+              </tr>
+              <tr>
+                <td><code>in</code></td>
+                <td>Pulgadas</td>
+                <td>Impresión</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>🔄 Unidades Relativas (adaptan tamaño)</h3>
+
+          <h4>EM - Relativo al padre</h4>
+          <div class="units-demo">
+            <div class="parent-em">
+              Padre: 16px (font-size base)
+              <div class="child-em">
+                Hijo: 1.5em = 24px (1.5 × 16px)
+                <div class="grandchild-em">
+                  Nieto: 1.5em = 36px (1.5 × 24px)
+                </div>
+              </div>
+            </div>
+            <pre><code>.parent { font-size: 16px; }
+.child { font-size: 1.5em; }      /* 1.5 × 16 = 24px */
+.grandchild { font-size: 1.5em; } /* 1.5 × 24 = 36px */</code></pre>
+            <div class="resultado">
+              <strong>⚠️ Problema:</strong> Efecto "multiplicador" en elementos
+              anidados.<br />
+              <strong>✅ Solución:</strong> Usar REM en su lugar.
+            </div>
+          </div>
+
+          <h4>REM - Relativo al root (html)</h4>
+          <div class="units-demo">
+            <div class="rem-1">1rem = 16px (tamaño base)</div>
+            <div class="rem-2">1.5rem = 24px</div>
+            <div class="rem-3">2rem = 32px</div>
+            <pre><code>html { font-size: 16px; }  /* Base */
+
+.small { font-size: 1rem; }    /* 16px */
+.medium { font-size: 1.5rem; } /* 24px */
+.large { font-size: 2rem; }    /* 32px */</code></pre>
+            <div class="resultado">
+              <strong>✅ Ventaja:</strong> Siempre relativo al tamaño base, sin
+              efecto multiplicador.<br />
+              <strong>🏆 Mejor práctica:</strong> Usar REM para tamaños de
+              fuente y espaciado.
+            </div>
+          </div>
+
+          <h4>Porcentaje (%)</h4>
+          <div class="units-demo">
+            <div class="percent-parent">
+              Contenedor: 100%
+              <div class="percent-50">Hijo: 50%</div>
+              <div class="percent-75">Hijo: 75%</div>
+            </div>
+            <pre><code>.container { width: 100%; }
+.half { width: 50%; }       /* 50% del padre */
+.three-quarters { width: 75%; }</code></pre>
+            <div class="resultado">
+              <strong>✅ Uso:</strong> Layouts fluidos, diseño responsivo.<br />
+              <strong>💡 Nota:</strong> Siempre relativo al elemento padre.
+            </div>
+          </div>
+
+          <h4>Unidades de Viewport</h4>
+          <div class="units-demo">
+            <div class="vw-example">50vw = 50% del ancho del navegador</div>
+            <div class="vh-example">20vh = 20% de la altura del navegador</div>
+            <div class="vmin-example">
+              30vmin × 30vmin<br />(círculo responsivo)
+            </div>
+            <pre><code>/* VW - Viewport Width (ancho) */
+width: 50vw;   /* 50% del ancho de la ventana */
+
+/* VH - Viewport Height (alto) */
+height: 100vh; /* 100% de la altura de la ventana */
+
+/* VMIN - El menor entre vw y vh */
+width: 30vmin;  /* 30% de la dimensión más pequeña */
+
+/* VMAX - El mayor entre vw y vh */
+width: 30vmax;  /* 30% de la dimensión más grande */</code></pre>
+            <div class="resultado">
+              <strong>✅ Uso común:</strong><br />
+              • <code>100vh</code> para secciones de altura completa<br />
+              • <code>vw</code> para tipografía responsiva<br />
+              • <code>vmin/vmax</code> para elementos cuadrados adaptables
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Unidad</th>
+                <th>Relativo a</th>
+                <th>Uso recomendado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>em</code></td>
+                <td>Tamaño de fuente del padre</td>
+                <td>Espaciado interno de componentes</td>
+              </tr>
+              <tr>
+                <td><code>rem</code></td>
+                <td>Tamaño de fuente del root (html)</td>
+                <td>🏆 Tamaños de fuente, márgenes globales</td>
+              </tr>
+              <tr>
+                <td><code>%</code></td>
+                <td>Elemento padre</td>
+                <td>Layouts, anchos de columnas</td>
+              </tr>
+              <tr>
+                <td><code>vw</code></td>
+                <td>1% del ancho del viewport</td>
+                <td>Anchos responsivos, tipografía fluida</td>
+              </tr>
+              <tr>
+                <td><code>vh</code></td>
+                <td>1% de la altura del viewport</td>
+                <td>Secciones de altura completa</td>
+              </tr>
+              <tr>
+                <td><code>vmin</code></td>
+                <td>1% de la dimensión menor</td>
+                <td>Elementos cuadrados</td>
+              </tr>
+              <tr>
+                <td><code>vmax</code></td>
+                <td>1% de la dimensión mayor</td>
+                <td>Fondos, overlays</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Mejores Prácticas -->
+        <section>
+          <h2>✅ Mejores Prácticas</h2>
+
+          <h3>Colores:</h3>
+          <ul style="line-height: 2">
+            <li>
+              Usa <strong>hexadecimal</strong> para colores sólidos simples
+            </li>
+            <li>
+              Usa <strong>RGBA/HSLA</strong> cuando necesites transparencia
+            </li>
+            <li>
+              Usa <strong>HSL</strong> para crear paletas y variaciones de color
+            </li>
+            <li>
+              Define colores en variables CSS (<code>--color-primary</code>)
+            </li>
+            <li>
+              Asegura suficiente contraste para accesibilidad (WCAG 4.5:1)
+            </li>
+          </ul>
+
+          <h3>Unidades:</h3>
+          <ul style="line-height: 2">
+            <li>
+              Usa <strong>rem</strong> para tamaños de fuente (accesibilidad)
+            </li>
+            <li>Usa <strong>px</strong> para bordes y sombras (precisión)</li>
+            <li>Usa <strong>%</strong> para anchos de layouts</li>
+            <li>Usa <strong>vh/vw</strong> para secciones full-screen</li>
+            <li>Evita <strong>pt, cm, mm</strong> excepto para impresión</li>
+            <li>
+              Combina unidades: <code>max-width: 1200px</code> con
+              <code>width: 90%</code>
+            </li>
+          </ul>
+
+          <pre><code>/* ✅ Buenas prácticas combinadas */
+:root {
+    --color-primary: #667eea;
+    --color-secondary: #764ba2;
+    --spacing-unit: 1rem;
+}
+
+body {
+    font-size: 16px;        /* Base para rem */
+    color: #333;            /* Hexadecimal para sólido */
+    background: rgba(102, 126, 234, 0.1); /* RGBA para transparencia */
+}
+
+.container {
+    max-width: 1200px;      /* px para límite */
+    width: 90%;             /* % para responsive */
+    margin: 0 auto;
+    padding: var(--spacing-unit);
+}
+
+h1 {
+    font-size: 2.5rem;      /* rem para escalable */
+    margin-bottom: 1rem;
+}
+
+.hero {
+    height: 100vh;          /* vh para full-screen */
+    background: linear-gradient(135deg, 
+        var(--color-primary) 0%, 
+        var(--color-secondary) 100%);
+}</code></pre>
+        </section>
+      </main>
+
+      <footer>
+        <p><strong>Módulo 2 - Fundamentos Frontend</strong></p>
+        <p>Colores y Unidades CSS - Guía Completa</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8">
+          📚 Ver notas:
+          <code>css/01-notas-css3-introduccion-selectores.md</code>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

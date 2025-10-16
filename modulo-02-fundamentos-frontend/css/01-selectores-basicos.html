@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01 - Selectores Básicos CSS</title>
+    <style>
+      /* ===================================
+           RESET Y CONFIGURACIÓN BÁSICA
+           =================================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ===================================
+           HEADER
+           =================================== */
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* ===================================
+           CONTENIDO PRINCIPAL
+           =================================== */
+      main {
+        padding: 40px;
+      }
+
+      section {
+        margin-bottom: 50px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 5px solid #667eea;
+      }
+
+      h2 {
+        color: #667eea;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      h3 {
+        color: #764ba2;
+        font-size: 1.3rem;
+        margin: 25px 0 15px 0;
+      }
+
+      /* ===================================
+           1. SELECTOR DE ELEMENTO
+           =================================== */
+
+      /* Todos los párrafos */
+      p {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      /* ===================================
+           2. SELECTOR DE CLASE
+           =================================== */
+
+      .destacado {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+
+      .importante {
+        color: #dc3545;
+        font-weight: bold;
+      }
+
+      .exito {
+        color: #28a745;
+        font-weight: bold;
+      }
+
+      .info {
+        color: #17a2b8;
+        font-style: italic;
+      }
+
+      /* Múltiples clases */
+      .caja {
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      .caja-azul {
+        background-color: #d1ecf1;
+        border: 2px solid #17a2b8;
+      }
+
+      .caja-verde {
+        background-color: #d4edda;
+        border: 2px solid #28a745;
+      }
+
+      .caja-roja {
+        background-color: #f8d7da;
+        border: 2px solid #dc3545;
+      }
+
+      /* ===================================
+           3. SELECTOR DE ID
+           =================================== */
+
+      #encabezado-principal {
+        font-size: 2.5rem;
+        color: #667eea;
+        text-align: center;
+        margin: 30px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #pie-pagina {
+        background-color: #2c3e50;
+        color: white;
+        padding: 30px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      /* ===================================
+           4. SELECTOR UNIVERSAL
+           Se aplica en el reset al inicio
+           =================================== */
+
+      /* ===================================
+           5. SELECTORES DE ATRIBUTO
+           =================================== */
+
+      /* Enlaces externos (target="_blank") */
+      a[target="_blank"] {
+        color: #e74c3c;
+        text-decoration: none;
+      }
+
+      a[target="_blank"]::after {
+        content: " 🔗";
+        font-size: 0.8em;
+      }
+
+      /* Inputs de tipo texto */
+      input[type="text"] {
+        border: 2px solid #667eea;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        margin: 5px 0;
+      }
+
+      /* Inputs de tipo email */
+      input[type="email"] {
+        border: 2px solid #28a745;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        margin: 5px 0;
+      }
+
+      /* ===================================
+           6. SELECTORES DESCENDIENTES
+           =================================== */
+
+      /* Párrafos dentro de .destacado */
+      .destacado p {
+        color: #856404;
+        margin-bottom: 10px;
+      }
+
+      /* Enlaces dentro de nav */
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: inline-block;
+        transition: background 0.3s;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
+
+      /* ===================================
+           7. SELECTOR HIJO DIRECTO
+           =================================== */
+
+      .lista-padre > li {
+        background-color: #e3f2fd;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+        list-style-position: inside;
+      }
+
+      /* ===================================
+           8. SELECTOR HERMANO ADYACENTE
+           =================================== */
+
+      h3 + p {
+        font-weight: bold;
+        color: #667eea;
+        font-size: 1.1rem;
+      }
+
+      /* ===================================
+           9. SELECTOR HERMANOS GENERALES
+           =================================== */
+
+      .subtitulo ~ p {
+        padding-left: 20px;
+        border-left: 3px solid #dee2e6;
+      }
+
+      /* ===================================
+           10. PSEUDO-CLASES
+           =================================== */
+
+      /* Hover en botones */
+      .boton {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin: 5px;
+      }
+
+      .boton:hover {
+        background-color: #5568d3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .boton:active {
+        transform: translateY(0);
+      }
+
+      /* First-child, last-child */
+      .lista-items li:first-child {
+        background-color: #d4edda;
+        font-weight: bold;
+      }
+
+      .lista-items li:last-child {
+        background-color: #f8d7da;
+        font-weight: bold;
+      }
+
+      /* Nth-child (pares e impares) */
+      .tabla-ejemplo tr:nth-child(odd) {
+        background-color: #f8f9fa;
+      }
+
+      .tabla-ejemplo tr:nth-child(even) {
+        background-color: #e9ecef;
+      }
+
+      /* Focus en inputs */
+      input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      }
+
+      /* ===================================
+           11. PSEUDO-ELEMENTOS
+           =================================== */
+
+      .con-icono::before {
+        content: "✨ ";
+        color: #ffc107;
+      }
+
+      .con-icono::after {
+        content: " ✨";
+        color: #ffc107;
+      }
+
+      .primera-letra::first-letter {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #667eea;
+        float: left;
+        line-height: 1;
+        margin-right: 5px;
+      }
+
+      .primera-linea::first-line {
+        font-weight: bold;
+        color: #764ba2;
+      }
+
+      /* ===================================
+           12. AGRUPACIÓN DE SELECTORES
+           =================================== */
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: Georgia, serif;
+      }
+
+      .alerta,
+      .advertencia,
+      .error {
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+
+      .alerta {
+        background-color: #d1ecf1;
+        border-left: 5px solid #17a2b8;
+      }
+
+      .advertencia {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        border-left: 5px solid #dc3545;
+      }
+
+      /* ===================================
+           TABLA
+           =================================== */
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+      }
+
+      th {
+        background-color: #667eea;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* ===================================
+           FORMULARIO
+           =================================== */
+
+      form {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #495057;
+      }
+
+      /* ===================================
+           LISTA
+           =================================== */
+
+      ul,
+      ol {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      /* ===================================
+           CÓDIGO
+           =================================== */
+
+      code {
+        background-color: #f8f9fa;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        color: #e83e8c;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎨 Selectores CSS</h1>
+        <p>Guía práctica con ejemplos interactivos</p>
+      </header>
+
+      <main>
+        <!-- Sección 1: Selector de Elemento -->
+        <section>
+          <h2>1. Selector de Elemento (Type Selector)</h2>
+          <p>
+            Selecciona <strong>todos</strong> los elementos de un tipo
+            específico.
+          </p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>p {
+    color: #333;
+    margin-bottom: 15px;
+}</code></pre>
+
+          <h3>Resultado:</h3>
+          <p>Este es un párrafo normal con el estilo aplicado.</p>
+          <p>Este es otro párrafo con el mismo estilo.</p>
+        </section>
+
+        <!-- Sección 2: Selector de Clase -->
+        <section>
+          <h2>2. Selector de Clase (Class Selector)</h2>
+          <p>
+            Selecciona elementos con una clase específica. Prefijo:
+            <code>.</code>
+          </p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>.destacado {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+}
+
+.importante {
+    color: #dc3545;
+    font-weight: bold;
+}</code></pre>
+
+          <h3>Resultados:</h3>
+          <div class="destacado">
+            <p>Este div tiene la clase "destacado"</p>
+          </div>
+
+          <p class="importante">Este párrafo tiene la clase "importante"</p>
+          <p class="exito">Este párrafo tiene la clase "exito"</p>
+          <p class="info">Este párrafo tiene la clase "info"</p>
+
+          <h3>Múltiples clases:</h3>
+          <div class="caja caja-azul">
+            Caja con dos clases: "caja" y "caja-azul"
+          </div>
+          <div class="caja caja-verde">
+            Caja con dos clases: "caja" y "caja-verde"
+          </div>
+          <div class="caja caja-roja">
+            Caja con dos clases: "caja" y "caja-roja"
+          </div>
+        </section>
+
+        <!-- Sección 3: Selector de ID -->
+        <section>
+          <h2>3. Selector de ID</h2>
+          <p>
+            Selecciona un elemento único con un ID específico. Prefijo:
+            <code>#</code>
+          </p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>#encabezado-principal {
+    font-size: 2.5rem;
+    color: #667eea;
+    text-align: center;
+}</code></pre>
+
+          <h3>Resultado:</h3>
+          <h1 id="encabezado-principal">Este es el encabezado principal</h1>
+          <p style="text-align: center; color: #666; font-style: italic">
+            ⚠️ Recuerda: Los IDs deben ser únicos en la página
+          </p>
+        </section>
+
+        <!-- Sección 4: Selectores de Atributo -->
+        <section>
+          <h2>4. Selectores de Atributo</h2>
+          <p>Selecciona elementos basándose en sus atributos.</p>
+
+          <h3>Enlaces externos con <code>target="_blank"</code>:</h3>
+          <p>
+            <a href="https://google.com" target="_blank"
+              >Enlace externo a Google</a
+            ><br />
+            <a href="pagina.html">Enlace interno</a>
+          </p>
+
+          <h3>Inputs por tipo:</h3>
+          <form>
+            <label>Nombre (type="text"):</label>
+            <input type="text" placeholder="Borde azul" />
+
+            <label>Email (type="email"):</label>
+            <input type="email" placeholder="Borde verde" />
+          </form>
+        </section>
+
+        <!-- Sección 5: Selectores Descendientes -->
+        <section>
+          <h2>5. Selectores Descendientes</h2>
+          <p>Selecciona elementos dentro de otros elementos.</p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>.destacado p {
+    color: #856404;
+}</code></pre>
+
+          <h3>Resultado:</h3>
+          <div class="destacado">
+            <p>Este párrafo está dentro de un div con clase "destacado"</p>
+            <p>Este también heredará el estilo</p>
+          </div>
+        </section>
+
+        <!-- Sección 6: Selector Hijo Directo -->
+        <section>
+          <h2>6. Selector Hijo Directo (&gt;)</h2>
+          <p>Selecciona solo los hijos directos.</p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>.lista-padre > li {
+    background-color: #e3f2fd;
+    padding: 10px;
+}</code></pre>
+
+          <h3>Resultado:</h3>
+          <ul class="lista-padre">
+            <li>Hijo directo (con estilo)</li>
+            <li>Hijo directo (con estilo)</li>
+            <li>
+              Hijo directo (con estilo)
+              <ul>
+                <li>Hijo indirecto (sin estilo)</li>
+                <li>Hijo indirecto (sin estilo)</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Sección 7: Hermano Adyacente -->
+        <section>
+          <h2>7. Selector Hermano Adyacente (+)</h2>
+          <p>Selecciona el siguiente hermano inmediato.</p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>h3 + p {
+    font-weight: bold;
+    color: #667eea;
+}</code></pre>
+
+          <h3>Ejemplo:</h3>
+          <p>
+            Este párrafo será DIFERENTE (en negrita y azul) porque viene justo
+            después de h3.
+          </p>
+          <p>Este párrafo será normal.</p>
+        </section>
+
+        <!-- Sección 8: Hermanos Generales -->
+        <section>
+          <h2>8. Selector Hermanos Generales (~)</h2>
+          <p class="subtitulo">Este párrafo tiene clase "subtitulo"</p>
+          <p>
+            Este párrafo tiene borde izquierdo (hermano después de .subtitulo)
+          </p>
+          <p>Este también tiene borde izquierdo</p>
+          <div>Este div rompe la secuencia</div>
+          <p>
+            Este también tiene borde izquierdo (sigue siendo hermano de
+            .subtitulo)
+          </p>
+        </section>
+
+        <!-- Sección 9: Pseudo-clases -->
+        <section>
+          <h2>9. Pseudo-clases</h2>
+          <p>Seleccionan elementos en estados específicos.</p>
+
+          <h3>:hover (pasa el mouse sobre los botones)</h3>
+          <button class="boton">Botón 1</button>
+          <button class="boton">Botón 2</button>
+          <a href="#" class="boton">Enlace como botón</a>
+
+          <h3>:first-child y :last-child</h3>
+          <ul class="lista-items">
+            <li>Primer elemento (verde y negrita)</li>
+            <li>Elemento del medio</li>
+            <li>Elemento del medio</li>
+            <li>Último elemento (rojo y negrita)</li>
+          </ul>
+
+          <h3>:nth-child(odd) y :nth-child(even)</h3>
+          <table class="tabla-ejemplo">
+            <tr>
+              <td>Fila 1 (impar - gris claro)</td>
+            </tr>
+            <tr>
+              <td>Fila 2 (par - gris medio)</td>
+            </tr>
+            <tr>
+              <td>Fila 3 (impar - gris claro)</td>
+            </tr>
+            <tr>
+              <td>Fila 4 (par - gris medio)</td>
+            </tr>
+          </table>
+
+          <h3>:focus (haz clic en los inputs)</h3>
+          <input
+            type="text"
+            placeholder="Haz clic aquí para ver el efecto focus"
+          />
+        </section>
+
+        <!-- Sección 10: Pseudo-elementos -->
+        <section>
+          <h2>10. Pseudo-elementos</h2>
+          <p>Permiten estilizar partes específicas de elementos.</p>
+
+          <h3>::before y ::after</h3>
+          <p class="con-icono">Este texto tiene iconos antes y después</p>
+
+          <h3>::first-letter</h3>
+          <p class="primera-letra">
+            Esta es una letra capital decorativa al inicio del párrafo. El resto
+            del texto sigue normalmente con su estilo predeterminado.
+          </p>
+
+          <h3>::first-line</h3>
+          <p class="primera-linea">
+            La primera línea de este párrafo está en negrita y con color
+            diferente. El resto del párrafo continúa con el estilo normal del
+            texto.
+          </p>
+        </section>
+
+        <!-- Sección 11: Agrupación -->
+        <section>
+          <h2>11. Agrupación de Selectores</h2>
+          <p>Aplicar los mismos estilos a múltiples selectores.</p>
+
+          <h3>Código CSS:</h3>
+          <pre><code>h1, h2, h3, h4 {
+    font-family: Georgia, serif;
+}</code></pre>
+
+          <h3>Ejemplos de alertas:</h3>
+          <div class="alerta">Mensaje informativo</div>
+          <div class="advertencia">Mensaje de advertencia</div>
+          <div class="error">Mensaje de error</div>
+        </section>
+
+        <!-- Sección 12: Combinaciones -->
+        <section>
+          <h2>12. Combinaciones Complejas</h2>
+          <p>Puedes combinar múltiples selectores para mayor precisión.</p>
+
+          <h3>Ejemplos de combinaciones:</h3>
+          <ul>
+            <li>
+              <code>div.destacado p</code> - Párrafos dentro de divs con clase
+              "destacado"
+            </li>
+            <li>
+              <code>a.boton:hover</code> - Enlaces con clase "boton" al pasar el
+              mouse
+            </li>
+            <li>
+              <code>input[type="text"]:focus</code> - Inputs de texto cuando
+              están enfocados
+            </li>
+            <li>
+              <code>ul > li:first-child</code> - Primer hijo directo de una
+              lista
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer id="pie-pagina">
+        <p><strong>Módulo 2 - Fundamentos Frontend</strong></p>
+        <p>Selectores CSS - Ejemplos Prácticos</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8">
+          📚 Ver notas completas:
+          <code>css/01-notas-css3-introduccion-selectores.md</code>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
