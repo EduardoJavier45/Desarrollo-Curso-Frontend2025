@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ejemplos prácticos de accesibilidad web siguiendo las pautas WCAG 2.1"
+    />
+    <title>
+      05 - Accesibilidad Web: Ejemplos Prácticos | Curso Frontend 2025
+    </title>
+    <style>
+      /* Reset y variables */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-dark: #1e40af;
+        --color-success: #059669;
+        --color-error: #dc2626;
+        --color-warning: #d97706;
+        --color-bg: #f8fafc;
+        --color-bg-card: #ffffff;
+        --color-text: #1e293b;
+        --color-text-light: #64748b;
+        --color-border: #e2e8f0;
+        --focus-ring: 3px solid #3b82f6;
+        --focus-offset: 2px;
+      }
+
+      /* Skip link - WCAG 2.4.1 */
+      .skip-link {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        background: var(--color-primary);
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        z-index: 9999;
+        border-radius: 0 0 8px 0;
+        font-weight: 600;
+      }
+
+      .skip-link:focus {
+        top: 0;
+        outline: var(--focus-ring);
+        outline-offset: var(--focus-offset);
+      }
+
+      /* Estilos generales */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--color-text);
+        background: var(--color-bg);
+        padding-bottom: 50px;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+      }
+
+      /* Navegación */
+      nav {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      nav li {
+        margin: 0;
+      }
+
+      nav a {
+        display: block;
+        padding: 15px 20px;
+        color: var(--color-text);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background: var(--color-bg);
+        color: var(--color-primary);
+      }
+
+      nav a:focus {
+        outline: var(--focus-ring);
+        outline-offset: -3px;
+        background: var(--color-bg);
+      }
+
+      nav a[aria-current="page"] {
+        background: var(--color-primary);
+        color: white;
+      }
+
+      /* Contenedor principal */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      main {
+        padding: 40px 0;
+      }
+
+      /* Secciones */
+      section {
+        background: var(--color-bg-card);
+        border-radius: 12px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: var(--color-primary);
+        font-size: 2rem;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid var(--color-primary);
+      }
+
+      h3 {
+        color: var(--color-text);
+        font-size: 1.5rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin-bottom: 15px;
+        color: var(--color-text-light);
+        line-height: 1.8;
+      }
+
+      /* Focus visible - WCAG 2.4.7 */
+      a:focus,
+      button:focus,
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: var(--focus-ring);
+        outline-offset: var(--focus-offset);
+      }
+
+      /* Botones accesibles */
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: var(--color-text-light);
+      }
+
+      .btn-secondary:hover {
+        background: var(--color-text);
+      }
+
+      /* Formulario accesible */
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+
+      .required::after {
+        content: " *";
+        color: var(--color-error);
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--color-border);
+        border-radius: 6px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      input:hover,
+      textarea:hover,
+      select:hover {
+        border-color: var(--color-primary);
+      }
+
+      /* Estados de validación */
+      input:valid,
+      textarea:valid {
+        border-color: var(--color-success);
+      }
+
+      input:invalid:not(:placeholder-shown),
+      textarea:invalid:not(:placeholder-shown) {
+        border-color: var(--color-error);
+      }
+
+      input[aria-invalid="true"],
+      textarea[aria-invalid="true"] {
+        border-color: var(--color-error);
+      }
+
+      .help-text {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.9rem;
+        color: var(--color-text-light);
+      }
+
+      .error-message {
+        display: block;
+        margin-top: 5px;
+        color: var(--color-error);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .error-message::before {
+        content: "⚠ ";
+      }
+
+      .success-message {
+        display: block;
+        margin-top: 5px;
+        color: var(--color-success);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .success-message::before {
+        content: "✓ ";
+      }
+
+      /* Fieldset */
+      fieldset {
+        border: 2px solid var(--color-border);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      legend {
+        font-weight: 700;
+        color: var(--color-text);
+        padding: 0 10px;
+        font-size: 1.1rem;
+      }
+
+      /* Radio y Checkbox */
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .radio-option,
+      .checkbox-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .radio-option:hover,
+      .checkbox-option:hover {
+        background: var(--color-bg);
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      /* Acordeón accesible */
+      .accordion {
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .accordion-item:last-child {
+        border-bottom: none;
+      }
+
+      .accordion-button {
+        width: 100%;
+        padding: 20px;
+        background: white;
+        border: none;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease;
+      }
+
+      .accordion-button:hover {
+        background: var(--color-bg);
+      }
+
+      .accordion-button[aria-expanded="true"] {
+        background: var(--color-bg);
+      }
+
+      .accordion-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .accordion-button[aria-expanded="true"] .accordion-icon {
+        transform: rotate(180deg);
+      }
+
+      .accordion-content {
+        padding: 20px;
+        background: white;
+      }
+
+      .accordion-content[hidden] {
+        display: none;
+      }
+
+      /* Modal accesible */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+      }
+
+      .modal {
+        background: white;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 100%;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        color: var(--color-text);
+        margin: 0;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--color-text-light);
+        line-height: 1;
+        padding: 5px;
+      }
+
+      .modal-close:hover {
+        color: var(--color-text);
+      }
+
+      /* Alert/Notifications - ARIA live regions */
+      .alert {
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .alert-success {
+        background: #d1fae5;
+        border: 2px solid var(--color-success);
+        color: #065f46;
+      }
+
+      .alert-error {
+        background: #fee2e2;
+        border: 2px solid var(--color-error);
+        color: #991b1b;
+      }
+
+      .alert-warning {
+        background: #fef3c7;
+        border: 2px solid var(--color-warning);
+        color: #92400e;
+      }
+
+      .alert-info {
+        background: #dbeafe;
+        border: 2px solid #2563eb;
+        color: #1e40af;
+      }
+
+      /* Imágenes responsivas */
+      .image-example {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Contrast examples */
+      .contrast-examples {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .contrast-box {
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .contrast-good {
+        background: #000000;
+        color: #ffffff;
+      }
+
+      .contrast-bad {
+        background: #ffffff;
+        color: #cccccc;
+      }
+
+      /* Status indicators */
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .status-online {
+        background: #d1fae5;
+        color: var(--color-success);
+      }
+
+      .status-offline {
+        background: #fee2e2;
+        color: var(--color-error);
+      }
+
+      .status-icon {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      /* Table accesible */
+      .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      caption {
+        text-align: left;
+        padding: 15px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        background: var(--color-bg);
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      th {
+        background: var(--color-primary);
+        color: white;
+        font-weight: 600;
+      }
+
+      tr:hover {
+        background: var(--color-bg);
+      }
+
+      /* Lista de definiciones */
+      dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px 20px;
+        margin-top: 20px;
+      }
+
+      dt {
+        font-weight: 700;
+        color: var(--color-text);
+      }
+
+      dd {
+        color: var(--color-text-light);
+        margin: 0;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--color-text);
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 50px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        section {
+          padding: 20px;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        nav ul {
+          flex-direction: column;
+        }
+
+        nav a {
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .contrast-examples {
+          grid-template-columns: 1fr;
+        }
+
+        dl {
+          grid-template-columns: 1fr;
+          gap: 5px;
+        }
+
+        dt {
+          margin-top: 15px;
+        }
+      }
+
+      /* Print styles */
+      @media print {
+        header,
+        nav,
+        footer {
+          display: none;
+        }
+
+        section {
+          page-break-inside: avoid;
+        }
+      }
+
+      /* Hidden visually but accessible to screen readers */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      /* Código de ejemplo */
+      code {
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Header -->
+    <header role="banner">
+      <h1>♿ Accesibilidad Web</h1>
+      <p>Ejemplos prácticos siguiendo las pautas WCAG 2.1</p>
+    </header>
+
+    <!-- Navegación -->
+    <nav role="navigation" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#semantic">HTML Semántico</a></li>
+        <li><a href="#forms">Formularios</a></li>
+        <li><a href="#aria">ARIA</a></li>
+        <li><a href="#keyboard">Teclado</a></li>
+        <li><a href="#contrast">Contraste</a></li>
+        <li><a href="#multimedia">Multimedia</a></li>
+      </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+      <main id="main-content" role="main">
+        <!-- Sección 1: HTML Semántico -->
+        <section id="semantic">
+          <h2>1. HTML Semántico</h2>
+
+          <h3>Estructura correcta</h3>
+          <p>Este documento utiliza elementos semánticos apropiados:</p>
+
+          <ul>
+            <li><code>&lt;header&gt;</code> para el encabezado principal</li>
+            <li><code>&lt;nav&gt;</code> para la navegación</li>
+            <li><code>&lt;main&gt;</code> para el contenido principal</li>
+            <li><code>&lt;section&gt;</code> para secciones temáticas</li>
+            <li><code>&lt;article&gt;</code> para contenido independiente</li>
+            <li><code>&lt;footer&gt;</code> para el pie de página</li>
+          </ul>
+
+          <article>
+            <h3>Ejemplo de artículo</h3>
+            <p>
+              Este es un artículo de ejemplo que demuestra el uso del elemento
+              <code>&lt;article&gt;</code>. Los artículos son unidades de
+              contenido independientes que pueden ser distribuidas o
+              reutilizadas.
+            </p>
+            <p><time datetime="2025-10-16">16 de octubre de 2025</time></p>
+          </article>
+
+          <aside
+            style="
+              background: var(--color-bg);
+              padding: 20px;
+              border-radius: 8px;
+              margin-top: 20px;
+            "
+          >
+            <h3>Nota importante</h3>
+            <p>
+              El elemento <code>&lt;aside&gt;</code> se utiliza para contenido
+              relacionado pero separado del contenido principal.
+            </p>
+          </aside>
+        </section>
+
+        <!-- Sección 2: Formularios Accesibles -->
+        <section id="forms">
+          <h2>2. Formularios Accesibles</h2>
+
+          <form id="contact-form" novalidate>
+            <fieldset>
+              <legend>Información Personal</legend>
+
+              <div class="form-group">
+                <label for="name" class="required">Nombre completo</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  aria-describedby="name-help"
+                  autocomplete="name"
+                />
+                <span id="name-help" class="help-text">
+                  Ingresa tu nombre y apellido
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="required">Correo electrónico</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  aria-describedby="email-help"
+                  autocomplete="email"
+                />
+                <span id="email-help" class="help-text">
+                  Ejemplo: usuario@ejemplo.com
+                </span>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Teléfono (opcional)</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  pattern="[0-9]{9}"
+                  aria-describedby="phone-help"
+                  autocomplete="tel"
+                />
+                <span id="phone-help" class="help-text">
+                  Formato: 912345678 (9 dígitos)
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Preferencias</legend>
+
+              <div class="form-group">
+                <span
+                  id="contact-method-label"
+                  class="required"
+                  style="display: block; margin-bottom: 10px; font-weight: 600"
+                >
+                  ¿Cómo prefieres que te contactemos?
+                </span>
+                <div
+                  class="radio-group"
+                  role="radiogroup"
+                  aria-labelledby="contact-method-label"
+                  aria-required="true"
+                >
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="contact-email"
+                      name="contact-method"
+                      value="email"
+                      required
+                    />
+                    <label for="contact-email">Por correo electrónico</label>
+                  </div>
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="contact-phone"
+                      name="contact-method"
+                      value="phone"
+                      required
+                    />
+                    <label for="contact-phone">Por teléfono</label>
+                  </div>
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="contact-any"
+                      name="contact-method"
+                      value="any"
+                      required
+                    />
+                    <label for="contact-any">Cualquier medio</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <span
+                  style="display: block; margin-bottom: 10px; font-weight: 600"
+                  >Temas de interés</span
+                >
+                <div class="checkbox-group">
+                  <div class="checkbox-option">
+                    <input
+                      type="checkbox"
+                      id="interest-web"
+                      name="interests"
+                      value="web"
+                    />
+                    <label for="interest-web">Desarrollo Web</label>
+                  </div>
+                  <div class="checkbox-option">
+                    <input
+                      type="checkbox"
+                      id="interest-mobile"
+                      name="interests"
+                      value="mobile"
+                    />
+                    <label for="interest-mobile">Desarrollo Móvil</label>
+                  </div>
+                  <div class="checkbox-option">
+                    <input
+                      type="checkbox"
+                      id="interest-design"
+                      name="interests"
+                      value="design"
+                    />
+                    <label for="interest-design">Diseño UI/UX</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="required">Mensaje</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  aria-describedby="message-help"
+                ></textarea>
+                <span id="message-help" class="help-text">
+                  Mínimo 10 caracteres
+                </span>
+              </div>
+            </fieldset>
+
+            <div class="form-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms" class="required">
+                  Acepto los <a href="#terms-page">términos y condiciones</a>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn">Enviar formulario</button>
+              <button type="reset" class="btn btn-secondary">Limpiar</button>
+            </div>
+          </form>
+
+          <!-- Área para mensajes de estado -->
+          <div
+            id="form-status"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+        </section>
+
+        <!-- Sección 3: ARIA -->
+        <section id="aria">
+          <h2>3. ARIA (Accessible Rich Internet Applications)</h2>
+
+          <h3>Acordeón Accesible</h3>
+          <div class="accordion">
+            <div class="accordion-item">
+              <h3>
+                <button
+                  class="accordion-button"
+                  aria-expanded="false"
+                  aria-controls="panel1"
+                  id="accordion1"
+                >
+                  <span>¿Qué es ARIA?</span>
+                  <span class="accordion-icon" aria-hidden="true">▼</span>
+                </button>
+              </h3>
+              <div
+                id="panel1"
+                class="accordion-content"
+                role="region"
+                aria-labelledby="accordion1"
+                hidden
+              >
+                <p>
+                  ARIA (Accessible Rich Internet Applications) es un conjunto de
+                  atributos que hacen el contenido web y las aplicaciones web
+                  más accesibles para personas con discapacidades.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3>
+                <button
+                  class="accordion-button"
+                  aria-expanded="false"
+                  aria-controls="panel2"
+                  id="accordion2"
+                >
+                  <span>¿Cuándo usar ARIA?</span>
+                  <span class="accordion-icon" aria-hidden="true">▼</span>
+                </button>
+              </h3>
+              <div
+                id="panel2"
+                class="accordion-content"
+                role="region"
+                aria-labelledby="accordion2"
+                hidden
+              >
+                <p>
+                  Primera regla de ARIA: No usar ARIA si existe un elemento HTML
+                  nativo que proporciona la semántica necesaria. Usa ARIA solo
+                  cuando sea necesario para hacer contenido dinámico accesible.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3>
+                <button
+                  class="accordion-button"
+                  aria-expanded="false"
+                  aria-controls="panel3"
+                  id="accordion3"
+                >
+                  <span>Ejemplos de uso</span>
+                  <span class="accordion-icon" aria-hidden="true">▼</span>
+                </button>
+              </h3>
+              <div
+                id="panel3"
+                class="accordion-content"
+                role="region"
+                aria-labelledby="accordion3"
+                hidden
+              >
+                <ul>
+                  <li>
+                    <code>aria-label</code>: Proporciona etiqueta accesible
+                  </li>
+                  <li>
+                    <code>aria-labelledby</code>: Referencia a elemento etiqueta
+                  </li>
+                  <li>
+                    <code>aria-describedby</code>: Proporciona descripción
+                    adicional
+                  </li>
+                  <li><code>aria-live</code>: Anuncia cambios dinámicos</li>
+                  <li>
+                    <code>aria-expanded</code>: Estado expandido/colapsado
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 40px">Live Regions</h3>
+          <p>
+            Prueba los siguientes botones para ver cómo funcionan las regiones
+            "live":
+          </p>
+
+          <div style="margin: 20px 0">
+            <button class="btn" onclick="showNotification('success')">
+              Notificación de Éxito
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="showNotification('error')"
+            >
+              Notificación de Error
+            </button>
+          </div>
+
+          <div
+            id="notifications"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          <h3 style="margin-top: 40px">Estado de Conexión</h3>
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              align-items: center;
+              margin-top: 15px;
+            "
+          >
+            <span class="status status-online">
+              <span class="status-icon" aria-hidden="true"></span>
+              <span>En línea</span>
+            </span>
+            <span class="sr-only" aria-live="polite"
+              >El sistema está en línea</span
+            >
+          </div>
+        </section>
+
+        <!-- Sección 4: Navegación por Teclado -->
+        <section id="keyboard">
+          <h2>4. Navegación por Teclado</h2>
+
+          <p>Prueba navegar por esta página usando solo el teclado:</p>
+
+          <dl>
+            <dt>Tab</dt>
+            <dd>Navegar al siguiente elemento interactivo</dd>
+
+            <dt>Shift + Tab</dt>
+            <dd>Navegar al elemento anterior</dd>
+
+            <dt>Enter</dt>
+            <dd>Activar enlaces y botones</dd>
+
+            <dt>Espacio</dt>
+            <dd>Activar botones y checkboxes</dd>
+
+            <dt>Flechas</dt>
+            <dd>Navegar en grupos de radio buttons</dd>
+
+            <dt>Escape</dt>
+            <dd>Cerrar modales y menús</dd>
+          </dl>
+
+          <h3>Elementos Interactivos</h3>
+          <div
+            style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px"
+          >
+            <button class="btn">Botón 1</button>
+            <button class="btn">Botón 2</button>
+            <button class="btn">Botón 3</button>
+            <a href="#" class="btn">Enlace como botón</a>
+          </div>
+
+          <h3 style="margin-top: 30px">Modal Accesible</h3>
+          <p>
+            Los modales deben capturar el foco y permitir cerrar con Escape:
+          </p>
+          <button class="btn" onclick="openModal()">Abrir Modal</button>
+        </section>
+
+        <!-- Sección 5: Contraste de Colores -->
+        <section id="contrast">
+          <h2>5. Contraste de Colores</h2>
+
+          <p>
+            El contraste de color es crucial para usuarios con baja visión o
+            daltonismo.
+          </p>
+
+          <h3>Ratios WCAG</h3>
+          <ul>
+            <li>
+              <strong>Nivel AA:</strong> 4.5:1 para texto normal, 3:1 para texto
+              grande
+            </li>
+            <li>
+              <strong>Nivel AAA:</strong> 7:1 para texto normal, 4.5:1 para
+              texto grande
+            </li>
+          </ul>
+
+          <div class="contrast-examples">
+            <div class="contrast-box contrast-good">
+              <p style="margin: 0">
+                ✓ Buen contraste<br />Negro sobre blanco<br />Ratio: 21:1 (AAA)
+              </p>
+            </div>
+            <div class="contrast-box contrast-bad">
+              <p style="margin: 0">
+                ✗ Mal contraste<br />Gris claro sobre blanco<br />Ratio: 1.6:1
+                (Falla)
+              </p>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 30px">No usar solo color</h3>
+          <p>La información no debe comunicarse solo con color:</p>
+
+          <div style="margin-top: 15px">
+            <p>
+              <span style="color: var(--color-success)">
+                <span aria-hidden="true">✓</span> Campo válido
+              </span>
+            </p>
+            <p>
+              <span style="color: var(--color-error)">
+                <span aria-hidden="true">✗</span> Campo inválido
+              </span>
+            </p>
+          </div>
+        </section>
+
+        <!-- Sección 6: Multimedia -->
+        <section id="multimedia">
+          <h2>6. Imágenes y Multimedia Accesibles</h2>
+
+          <h3>Imágenes con texto alternativo</h3>
+
+          <figure>
+            <img
+              src="https://picsum.photos/600/400?random=100"
+              alt="Paisaje montañoso con lago cristalino reflejando el cielo azul y picos nevados"
+              class="image-example"
+              loading="lazy"
+            />
+            <figcaption>
+              Ejemplo de imagen con texto alternativo descriptivo
+            </figcaption>
+          </figure>
+
+          <h3 style="margin-top: 30px">Imagen decorativa</h3>
+          <p>
+            Las imágenes puramente decorativas deben tener <code>alt=""</code>:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              margin-top: 15px;
+            "
+          >
+            <img
+              src="https://picsum.photos/100/100?random=101"
+              alt=""
+              role="presentation"
+              style="border-radius: 50%"
+            />
+            <p style="margin: 0">
+              La imagen a la izquierda es decorativa y se ignora por lectores de
+              pantalla.
+            </p>
+          </div>
+
+          <h3 style="margin-top: 30px">Tabla Accesible</h3>
+          <div class="table-container">
+            <table>
+              <caption>
+                Niveles de conformidad WCAG 2.1
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Nivel</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Contraste mínimo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">A</th>
+                  <td>Requisitos básicos de accesibilidad</td>
+                  <td>3:1 (texto grande)</td>
+                </tr>
+                <tr>
+                  <th scope="row">AA</th>
+                  <td>Nivel recomendado (estándar)</td>
+                  <td>4.5:1 (texto normal)</td>
+                </tr>
+                <tr>
+                  <th scope="row">AAA</th>
+                  <td>Nivel más alto de accesibilidad</td>
+                  <td>7:1 (texto normal)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal (inicialmente oculto) -->
+    <div id="modal" class="modal-overlay" hidden>
+      <div
+        class="modal"
+        role="dialog"
+        aria-labelledby="modal-title"
+        aria-modal="true"
+      >
+        <div class="modal-header">
+          <h2 id="modal-title" class="modal-title">Modal Accesible</h2>
+          <button
+            class="modal-close"
+            onclick="closeModal()"
+            aria-label="Cerrar modal"
+          >
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Este es un ejemplo de modal accesible que:</p>
+          <ul>
+            <li>Captura el foco cuando se abre</li>
+            <li>Permite cerrar con la tecla Escape</li>
+            <li>Devuelve el foco al botón que lo abrió al cerrarse</li>
+            <li>
+              Usa <code>aria-modal="true"</code> y <code>role="dialog"</code>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="modal-footer"
+          style="
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+          "
+        >
+          <button class="btn btn-secondary" onclick="closeModal()">
+            Cancelar
+          </button>
+          <button class="btn" onclick="closeModal()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <p><strong>Curso de Desarrollo Frontend 2025</strong></p>
+      <p>Módulo 2 - Fundamentos Frontend</p>
+      <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8">
+        Este documento cumple con las pautas WCAG 2.1 Nivel AA
+      </p>
+      <p style="margin-top: 10px">
+        <a
+          href="../recursos/05-notas-accesibilidad-web.md"
+          style="color: #60a5fa; text-decoration: none"
+        >
+          Ver documentación completa
+        </a>
+      </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Acordeón
+      document.querySelectorAll(".accordion-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          const content = document.getElementById(
+            button.getAttribute("aria-controls")
+          );
+
+          button.setAttribute("aria-expanded", !expanded);
+          content.hidden = expanded;
+        });
+      });
+
+      // Modal
+      let lastFocusedElement;
+
+      function openModal() {
+        lastFocusedElement = document.activeElement;
+        const modal = document.getElementById("modal");
+        modal.hidden = false;
+
+        // Foco en el primer elemento interactivo
+        const closeButton = modal.querySelector(".modal-close");
+        closeButton.focus();
+
+        // Capturar Escape
+        document.addEventListener("keydown", handleEscape);
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modal");
+        modal.hidden = true;
+
+        // Devolver foco
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+
+        document.removeEventListener("keydown", handleEscape);
+      }
+
+      function handleEscape(e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      }
+
+      // Cerrar modal al hacer clic fuera
+      document.getElementById("modal").addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal-overlay")) {
+          closeModal();
+        }
+      });
+
+      // Notificaciones (ARIA live)
+      function showNotification(type) {
+        const container = document.getElementById("notifications");
+        const messages = {
+          success: "Operación completada exitosamente",
+          error: "Error: No se pudo completar la operación",
+        };
+
+        const alertClass = type === "success" ? "alert-success" : "alert-error";
+        const icon = type === "success" ? "✓" : "✗";
+
+        container.innerHTML = `
+                <div class="alert ${alertClass}" role="alert">
+                    <span aria-hidden="true">${icon}</span>
+                    <span>${messages[type]}</span>
+                </div>
+            `;
+
+        // Eliminar después de 5 segundos
+        setTimeout(() => {
+          container.innerHTML = "";
+        }, 5000);
+      }
+
+      // Validación de formulario
+      const form = document.getElementById("contact-form");
+      const formStatus = document.getElementById("form-status");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Simular envío
+        formStatus.innerHTML = `
+                <div class="alert alert-success" role="status">
+                    <span aria-hidden="true">✓</span>
+                    <span>Formulario enviado exitosamente</span>
+                </div>
+            `;
+
+        // Limpiar después de 3 segundos
+        setTimeout(() => {
+          form.reset();
+          formStatus.innerHTML = "";
+        }, 3000);
+      });
+
+      // Validación en tiempo real
+      form.addEventListener("input", (e) => {
+        const input = e.target;
+        if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
+          if (input.validity.valid) {
+            input.setAttribute("aria-invalid", "false");
+          } else if (input.value) {
+            input.setAttribute("aria-invalid", "true");
+          }
+        }
+      });
+
+      // Anunciar página cargada
+      window.addEventListener("load", () => {
+        console.log("Página de accesibilidad cargada completamente");
+      });
+    </script>
+  </body>
+</html>
